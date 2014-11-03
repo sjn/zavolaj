@@ -77,7 +77,7 @@ my $conninfo;
 my $conn;
 my $res;
 my $nFields;
-my $i,
+my $i;
 my $j;
 
 #
@@ -251,16 +251,16 @@ loop ( $j=0; $j < $field_count; $j++ ) {
     print '-' x @width[$j];
 }
 say '+';
-loop ( $i=0; $i<$row_count; $i++ ) {
+loop ( $i=0; $i < $row_count; $i++ ) {
     my @row = @rows[$i];
-    loop ( $j=0; $j<$field_count; $j++ ) {
+    loop ( $j=0; $j < $field_count; $j++ ) {
         my $field = @row[0][$j];
         print "| $field ";
         print ' ' x ( @width[$j] - $field.chars );
     }
     say '|';
 }
-loop ( $j=0; $j<$field_count; $j++ ) {
+loop ( $j=0; $j < $field_count; $j++ ) {
     print "+--";
     print '-' x @width[$j];
 }

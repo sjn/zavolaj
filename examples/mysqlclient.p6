@@ -226,7 +226,7 @@ if $batch-mode {
     print mysql_error($client);
 
     say "Columns:";
-    loop ( my $column_number=0; $column_number<$field_count; $column_number++ ) {
+    loop ( my $column_number=0; $column_number < $field_count; $column_number++ ) {
         my $field_info = mysql_fetch_field($result_set);
         my $column_name = $field_info[0];
         say "  $column_name";
@@ -241,7 +241,7 @@ if $batch-mode {
     # column widths from the maximum widths of the data in each
     # column.
     say "fetch_row, fetch_lengths and fetch_field";
-    loop ( my $row_number=0; $row_number<$row_count; $row_number++ ) {
+    loop ( my $row_number=0; $row_number < $row_count; $row_number++ ) {
         my $row_data = mysql_fetch_row( $result_set );
         my $field_length_array = mysql_fetch_lengths( $result_set );
 
@@ -251,7 +251,7 @@ if $batch-mode {
         # returned result is a packed binary record of character
         # pointers, unsigned longs and unsigned ints. See mysql.h
         my @row = ();
-        loop ( my $field_number=0; $field_number<$field_count; $field_number++ ) {
+        loop ( my $field_number=0; $field_number < $field_count; $field_number++ ) {
             my $field = $row_data[$field_number];
 # array of unsigned long segfaults
 #           my $chars = $field_length_array[$field_number];
@@ -266,21 +266,21 @@ if $batch-mode {
     print mysql_error($client);
     # Having determined the column widths by measuring every field,
     # it is finally possible to pretty print the table.
-    loop ( my $j=0; $j<$field_count; $j++ ) {
+    loop ( my $j=0; $j < $field_count; $j++ ) {
         print "+--";
         print '-' x @width[$j];
     }
     say '+';
-    loop ( my $i=0; $i<$row_count; $i++ ) {
+    loop ( my $i=0; $i < $row_count; $i++ ) {
         my @row = @rows[$i];
-        loop ( my $j=0; $j<$field_count; $j++ ) {
+        loop ( my $j=0; $j < $field_count; $j++ ) {
             my $field = @row[0][$j];
             print "| $field ";
             print ' ' x ( @width[$j] - $field.chars );
         }
         say '|';
     }
-    loop ( my $k=0; $k<$field_count; $k++ ) {
+    loop ( my $k=0; $k < $field_count; $k++ ) {
         print "+--";
         print '-' x @width[$k];
     }
@@ -293,7 +293,7 @@ else {
     print mysql_error($client);
 
     say "Columns:";
-    loop ( my $column_number=0; $column_number<$field_count; $column_number++ ) {
+    loop ( my $column_number=0; $column_number < $field_count; $column_number++ ) {
         my $field_info = mysql_fetch_field($result_set);
         my $column_name = $field_info[0];
         say "  $column_name";
@@ -301,7 +301,7 @@ else {
 
     while my $row_data = mysql_fetch_row($result_set) {
         my @row;
-        loop ( my $field_number=0; $field_number<$field_count; $field_number++ ) {
+        loop ( my $field_number=0; $field_number < $field_count; $field_number++ ) {
             my $field = $row_data[$field_number];
             @width[$field_number] = max @width[$field_number], $field.chars;
             push @row, $field;
